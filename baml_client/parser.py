@@ -41,7 +41,7 @@ class LlmResponseParser:
         self,
         llm_response: str,
         baml_options: BamlCallOptions = {},
-    ) -> types.Resume:
+    ) -> types.Stock:
       __tb__ = baml_options.get("tb", None)
       if __tb__ is not None:
         tb = __tb__._tb # type: ignore (we know how to use this private attribute)
@@ -61,7 +61,7 @@ class LlmResponseParser:
         __cr__,
       )
 
-      return cast(types.Resume, parsed)
+      return cast(types.Stock, parsed)
     
 
 
@@ -78,7 +78,7 @@ class LlmStreamParser:
         self,
         llm_response: str,
         baml_options: BamlCallOptions = {},
-    ) -> partial_types.Resume:
+    ) -> partial_types.Stock:
       __tb__ = baml_options.get("tb", None)
       if __tb__ is not None:
         tb = __tb__._tb # type: ignore (we know how to use this private attribute)
@@ -98,7 +98,7 @@ class LlmStreamParser:
         __cr__,
       )
 
-      return cast(partial_types.Resume, parsed)
+      return cast(partial_types.Stock, parsed)
     
 
 

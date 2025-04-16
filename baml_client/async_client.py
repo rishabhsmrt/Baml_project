@@ -104,7 +104,7 @@ class BamlAsyncClient:
         self,
         resume: str,
         baml_options: BamlCallOptions = {},
-    ) -> types.Resume:
+    ) -> types.Stock:
       options: BamlCallOptions = {**self.__baml_options, **(baml_options or {})}
 
       __tb__ = options.get("tb", None)
@@ -125,7 +125,7 @@ class BamlAsyncClient:
         __cr__,
         collectors,
       )
-      return cast(types.Resume, raw.cast_to(types, types, partial_types, False))
+      return cast(types.Stock, raw.cast_to(types, types, partial_types, False))
     
 
 
@@ -143,7 +143,7 @@ class BamlStreamClient:
         self,
         resume: str,
         baml_options: BamlCallOptions = {},
-    ) -> baml_py.BamlStream[partial_types.Resume, types.Resume]:
+    ) -> baml_py.BamlStream[partial_types.Stock, types.Stock]:
       options: BamlCallOptions = {**self.__baml_options, **(baml_options or {})}
       __tb__ = options.get("tb", None)
       if __tb__ is not None:
@@ -165,10 +165,10 @@ class BamlStreamClient:
         collectors,
       )
 
-      return baml_py.BamlStream[partial_types.Resume, types.Resume](
+      return baml_py.BamlStream[partial_types.Stock, types.Stock](
         raw,
-        lambda x: cast(partial_types.Resume, x.cast_to(types, types, partial_types, True)),
-        lambda x: cast(types.Resume, x.cast_to(types, types, partial_types, False)),
+        lambda x: cast(partial_types.Stock, x.cast_to(types, types, partial_types, True)),
+        lambda x: cast(types.Stock, x.cast_to(types, types, partial_types, False)),
         self.__ctx_manager.get(),
       )
     

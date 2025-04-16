@@ -35,8 +35,6 @@ class StreamState(BaseModel, Generic[T]):
     state: Literal["Pending", "Incomplete", "Complete"]
 
 
-class Resume(BaseModel):
-    name: Optional[str] = None
-    email: Optional[str] = None
-    experience: List[str]
-    skills: List[str]
+class Stock(BaseModel):
+    name: List[str]
+    market_parameters: List[types.Market_Indicator]

@@ -40,8 +40,15 @@ def all_succeeded(checks: Dict[CheckName, Check]) -> bool:
 
 
 
-class Resume(BaseModel):
-    name: str
-    email: str
-    experience: List[str]
-    skills: List[str]
+class Market_Indicator(str, Enum):
+    
+    OPEN = "OPEN"
+    HIGH = "HIGH"
+    LOW = "LOW"
+    PREV_CLOSE = "PREV_CLOSE"
+    Percentage_CHNG = "Percentage_CHNG"
+    VOLUME_TRADED = "VOLUME_TRADED"
+
+class Stock(BaseModel):
+    name: List[str]
+    market_parameters: List["Market_Indicator"]

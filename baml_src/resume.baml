@@ -1,18 +1,27 @@
+enum Market_Indicator {
+    OPEN
+    HIGH
+    LOW
+    PREV_CLOSE
+    Percentage_CHNG
+    VOLUME_TRADED 
+}
+
 // Defining a data model.
-class Resume {
-  name string
-  email string
-  experience string[]
-  skills string[]
+class Stock {
+  name string[] @description("Represents the name of stock price listed on National Stock Exchange India in Capital Letters")
+  market_parameters Market_Indicator[] @description(#"
+    Represent the what parameter is required to compare to stocks.
+  "#)
 }
 
 // Create a function to extract the resume from a string.
-function ExtractResume(resume: string) -> Resume {
+function ExtractResume(resume: string) -> Stock {
   // Specify a client as provider/model-name
   // you can use custom LLM params with a custom client name from clients.baml like "client CustomHaiku"
-  client "openai/gpt-4o" // Set OPENAI_API_KEY to use this client.
+  client "Mistral" // Set OPENAI_API_KEY to use this client.
   prompt #"
-    Extract from this content:
+    You are helpful agent which will extract the stock names and labels (like stock price and volume traded) from the given paragraph.
     {{ resume }}
     ----
     {{ ctx.output_format }}
@@ -23,21 +32,11 @@ function ExtractResume(resume: string) -> Resume {
 
 
 // Test the function with a sample resume. Open the VSCode playground to run this.
-test vaibhav_resume {
+test Get_stock_names {
   functions [ExtractResume]
   args {
     resume #"
-      Vaibhav Gupta
-      vbv@boundaryml.com
-
-      Experience:
-      - Founder at BoundaryML
-      - CV Engineer at Google
-      - CV Engineer at Microsoft
-
-      Skills:
-      - Rust
-      - C++
+      What is the high price and low price for TCS and ongc.
     "#
   }
 }
